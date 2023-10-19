@@ -6,10 +6,49 @@
   "author": "Ryan Collins",
   "license": "MIT",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.ryd3v.bitverify",
+    "productName": "BitVerify",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "about.html",
+      "styles.css",
+      "script.js",
+      "bitcoin.ico",
+      "bitcoin.png",
+      "output.css"
+    ],
+    "win": {
+      "icon": "bitcoin.ico",
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "icon": "bitcoin.png",
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "icon": "bitcoin.png",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
   },
   "devDependencies": {
-    "electron": "^27.0.1"
+    "electron": "^27.0.1",
+    "electron-builder": "^24.6.4"
   },
   "dependencies": {
     "autoprefixer": "^10.4.16",
