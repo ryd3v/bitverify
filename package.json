@@ -1,0 +1,20 @@
+{
+  "name": "bitverify",
+  "version": "1.0.0",
+  "description": "Offline Bitcoin Verify Tool",
+  "main": "main.js",
+  "author": "Ryan Collins",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^27.0.1"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "bitcoinjs-lib": "^6.1.5",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3"
+  }
+}
