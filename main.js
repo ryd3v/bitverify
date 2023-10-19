@@ -1,10 +1,11 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const path = require('node:path')
 const bitcoin = require('bitcoinjs-lib');
 const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
+        icon: path.join(__dirname, 'bitcoin.ico'),
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: true,
@@ -16,7 +17,39 @@ const createWindow = () => {
 }
 
 app.whenReady().then(() => {
-    createWindow()
+    createWindow();
+
+    const menuTemplate = [
+        {
+            label: 'File',
+            submenu: [
+                {
+                    label: 'About',
+                    click: () => {
+                        const aboutWindow = new BrowserWindow({
+                            width: 500,
+                            height: 400,
+                            icon: path.join(__dirname, 'bitcoin.ico'),
+                            webPreferences: {
+                                nodeIntegration: true,
+                                contextIsolation: false
+                            }
+                        });
+                        aboutWindow.loadFile('about.html');
+                        aboutWindow.setMenu(null);
+                    }
+                },
+                {
+                    label: 'Exit',
+                    click: () => {
+                        app.quit();
+                    }
+                }
+            ]
+        }
+    ];
+    const menu = Menu.buildFromTemplate(menuTemplate);
+    Menu.setApplicationMenu(menu);
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
